@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>الرحمن - أذكار وأدعية</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مدير المبيعات والمشتريات - Smart-Soft</title>
   <style>
     * {
       margin: 0;
@@ -11,970 +11,1368 @@
       box-sizing: border-box;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+
     body {
-      background-color: #f9f9f9;
+      background: url('https://i.imgur.com/7K6fXzL.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* شريط القمة */
+    .top-bar {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 100;
+      position: relative;
+    }
+
+    .top-bar .icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .top-bar .icons div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      padding: 5px;
+      transition: transform 0.2s;
+    }
+
+    .top-bar .icons div:hover {
+      transform: scale(1.1);
+    }
+
+    .top-bar .icons img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    .top-bar .icons span {
+      font-size: 12px;
+      text-align: center;
+      color: #333;
+      white-space: nowrap;
+    }
+
+    .top-bar .status {
+      background: #007bff;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .exit-btn {
+      background: #e74c3c;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .exit-btn:hover {
+      background: #c0392b;
+    }
+
+    /* الواجهة الرئيسية */
+    .main-container {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: 30px auto;
+    }
+
+    .tile {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
       padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 120px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .tile:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .tile i {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .tile span {
+      font-size: 16px;
+      font-weight: bold;
       color: #333;
     }
-    .welcome-screen {
+
+    /* الألوان المختلفة للأزرار */
+    .tile:nth-child(1) { background: #a93226; color: white; }
+    .tile:nth-child(2) { background: #7d3c98; color: white; }
+    .tile:nth-child(3) { background: #16a085; color: white; }
+    .tile:nth-child(4) { background: #2980b9; color: white; }
+    .tile:nth-child(5) { background: #3498db; color: white; }
+    .tile:nth-child(6) { background: #9b59b6; color: white; }
+    .tile:nth-child(7) { background: #27ae60; color: white; }
+    .tile:nth-child(8) { background: #16a085; color: white; }
+    .tile:nth-child(9) { background: #e67e22; color: white; }
+    .tile:nth-child(10) { background: #7f8c8d; color: white; }
+    .tile:nth-child(11) { background: #2ecc71; color: white; }
+    .tile:nth-child(12) { background: #9b59b6; color: white; }
+    .tile:nth-child(13) { background: #e91e63; color: white; }
+
+    /* شريط الحالة السفلي */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+
+    .footer-left {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .footer-left span {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .weather {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .icons-small {
+      display: flex;
+      gap: 10px;
+    }
+
+    .icons-small img {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    /* نافذة التنبيه عند الخروج */
+    .modal {
+      display: none;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #8B4513, #A0522D);
-      display: flex;
-      flex-direction: column;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
       justify-content: center;
       align-items: center;
-      z-index: 3000;
-      transition: transform 0.8s ease, opacity 0.8s ease;
     }
-    .welcome-content {
-      text-align: center;
-      color: white;
+
+    .modal-content {
+      background: white;
       padding: 20px;
-      max-width: 500px;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
-    .welcome-logo {
-      font-size: 80px;
-      margin-bottom: 20px;
-    }
-    .welcome-title {
-      font-size: 36px;
+
+    .modal-content h3 {
       margin-bottom: 15px;
-      font-weight: bold;
-    }
-    .welcome-subtitle {
-      font-size: 18px;
-      margin-bottom: 10px;
-      line-height: 1.6;
-    }
-    .personal-greeting {
-      font-size: 22px;
-      margin-bottom: 20px;
-      font-weight: bold;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 10px 20px;
-      border-radius: 30px;
-      display: inline-block;
-    }
-    .start-btn {
-      background: white;
-      color: #8B4513;
-      border: none;
-      padding: 15px 40px;
-      border-radius: 30px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .start-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-    }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      background-color: white;
-      border-radius: 15px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      margin-bottom: 20px;
-    }
-    .app-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .app-logo {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #8B4513, #A0522D);
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      color: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .app-name {
-      font-size: 20px;
-      font-weight: bold;
       color: #333;
     }
-    .counter-btn {
-      background: linear-gradient(135deg, #8B4513, #A0522D);
-      color: white;
+
+    .modal-buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 8px 15px;
       border: none;
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-weight: bold;
+      border-radius: 5px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .counter-btn:hover {
-      transform: scale(1.05);
-    }
-    .main-container {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    }
-    .section-title {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 24px;
-      color: #333;
-      position: relative;
-    }
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 50px;
-      height: 3px;
-      background: linear-gradient(90deg, #8B4513, #A0522D);
-      margin: 10px auto;
-      border-radius: 3px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 15px;
-    }
-    .card {
-      background: linear-gradient(135deg, #A0522D, #8B4513);
-      border-radius: 15px;
-      padding: 15px;
-      text-align: center;
-      font-size: 18px;
       font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      color: white;
-      position: relative;
     }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-    }
-    .counter-badge {
-      position: absolute;
-      top: -8px;
-      left: -8px;
-      background: #D2691E;
+
+    .btn-yes {
+      background: #27ae60;
       color: white;
+    }
+
+    .btn-no {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    /* أيقونات */
+    .fa {
+      font-family: "FontAwesome";
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+    }
+
+    .fa-shopping-cart::before { content: "\f07a"; }
+    .fa-file-text::before { content: "\f15c"; }
+    .fa-credit-card::before { content: "\f09d"; }
+    .fa-truck::before { content: "\f0d1"; }
+    .fa-user::before { content: "\f007"; }
+    .fa-users::before { content: "\f0c0"; }
+    .fa-clipboard::before { content: "\f0ea"; }
+    .fa-briefcase::before { content: "\f0b1"; }
+    .fa-archive::before { content: "\f187"; }
+    .fa-th-large::before { content: "\f009"; }
+    .fa-money::before { content: "\f0d6"; }
+    .fa-phone::before { content: "\f095"; }
+    .fa-cogs::before { content: "\f085"; }
+    .fa-database::before { content: "\f1c0"; }
+    .fa-usd::before { content: "\f155"; }
+    .fa-line-chart::before { content: "\f201"; }
+    .fa-list-alt::before { content: "\f022"; }
+    .fa-cart-plus::before { content: "\f217"; }
+    .fa-cart-arrow-down::before { content: "\f218"; }
+    .fa-folder-open::before { content: "\f07c"; }
+    .fa-motorcycle::before { content: "\f21c"; }
+    .fa-group::before { content: "\f0c0"; }
+    .fa-inbox::before { content: "\f01c"; }
+    .fa-sitemap::before { content: "\f0e8"; }
+    .fa-user-tie::before { content: "\f508"; }
+    .fa-box::before { content: "\f466"; }
+    .fa-undo::before { content: "\f0e2"; }
+    .fa-sign-out::before { content: "\f2f5"; }
+
+    .icon-small {
+      width: 20px;
+      height: 20px;
+      background: #ccc;
       border-radius: 50%;
-      width: 25px;
-      height: 25px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 12px;
-      font-weight: bold;
+      color: #333;
     }
-    .azkar-content {
-      display: none;
-      background: #fff;
-      padding: 25px;
-      border-radius: 15px;
-      margin-top: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      direction: rtl;
-      line-height: 1.9;
-      font-size: 17px;
-      color: #222;
-    }
-    .azkar-content h3 {
-      color: #8B4513;
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 22px;
-      border-bottom: 2px solid #f5e9df;
-      padding-bottom: 10px;
-    }
-    .azkar-item {
-      margin-bottom: 20px;
-      text-align: center;
-      font-weight: normal;
-      font-size: 18px;
-      color: #5D4037;
-      padding: 15px;
-      border-radius: 10px;
-      background-color: #f9f1eb;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-    .azkar-item:hover {
-      background-color: #f5e9df;
-      transform: scale(1.01);
-    }
-    .azkar-counter {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 15px;
-      gap: 10px;
-    }
-    .counter-display {
-      background: #8B4513;
-      color: white;
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-weight: bold;
-      min-width: 80px;
-      text-align: center;
-      transition: opacity 0.3s ease;
-    }
-    .increase-btn {
-      background: #D2691E;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .increase-btn:hover {
-      background: #A0522D;
-      transform: scale(1.05);
-    }
-    .completion-message {
-      color: #8B4513;
-      font-weight: bold;
-      margin-top: 10px;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .repeat-counter {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 10px;
-      gap: 10px;
-    }
-    .repeat-label {
-      font-size: 14px;
-      color: #555;
-    }
-    .repeat-input {
-      width: 50px;
-      text-align: center;
-      padding: 5px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-    .back-btn {
-      display: block;
-      width: fit-content;
-      margin: 20px auto 0;
-      background: linear-gradient(135deg, #8B4513, #A0522D);
-      color: white;
-      padding: 10px 30px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-    }
-    .back-btn:hover {
-      transform: scale(1.05);
-    }
-    .scroll-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(139, 69, 19, 0.7);
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 24px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      transition: all 0.3s ease;
-      z-index: 1000;
-      opacity: 0;
-      pointer-events: none;
-    }
-    .scroll-to-top:hover {
-      background: #8B4513;
-      transform: scale(1.1);
-    }
-    .counter-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-    }
-    .counter-content {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 500px;
-      text-align: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-    .counter-content h3 {
-      color: #8B4513;
-      margin-bottom: 20px;
-    }
-    .counter-list {
-      max-height: 300px;
-      overflow-y: auto;
-      margin-bottom: 20px;
-      text-align: right;
-    }
-    .counter-item {
-      padding: 10px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      justify-content: space-between;
-    }
-    .counter-item:last-child {
-      border-bottom: none;
-    }
-    .close-counter {
-      background: linear-gradient(135deg, #8B4513, #A0522D);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .close-counter:hover {
-      transform: scale(1.05);
-    }
+
     @media (max-width: 768px) {
-      .grid {
+      .main-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 15px;
+      }
+      .top-bar .icons span {
+        font-size: 10px;
+      }
+      .tile {
+        min-height: 100px;
+        padding: 15px;
+      }
+      .tile i {
+        font-size: 30px;
+      }
+      .tile span {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-container {
         grid-template-columns: 1fr;
       }
-      .azkar-item {
-        font-size: 16px;
+      .top-bar {
+        flex-wrap: wrap;
       }
-      .header {
+      .top-bar .icons {
+        gap: 10px;
+      }
+      .footer {
         flex-direction: column;
-        gap: 15px;
+        gap: 10px;
       }
-      .welcome-title {
-        font-size: 28px;
-      }
-      .welcome-subtitle {
-        font-size: 16px;
-      }
-      .personal-greeting {
-        font-size: 18px;
-      }
+    }
+
+    /* محتوى الصفحات الداخلية */
+    .page-content {
+      display: none;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border-radius: 10px;
+      margin: 30px auto;
+      max-width: 1200px;
+    }
+
+    .page-content.active {
+      display: block;
+    }
+
+    .form-group {
+      margin: 15px 0;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background: #27ae60;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #219653;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: right;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background: #3498db;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .actions {
+      display: flex;
+      gap: 5px;
+    }
+
+    .edit-btn {
+      background: #f39c12;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .delete-btn {
+      background: #e74c3c;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .back-btn {
+      background: #3498db;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .back-btn:hover {
+      background: #2982c1;
+    }
+
+    .print-btn {
+      background: #9b59b6;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .print-btn:hover {
+      background: #8e44ad;
+    }
+
+    .header-page {
+      background: #2c3e50;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .header-page h1 {
+      margin: 0;
+    }
+
+    /* صفحة تسجيل الدخول */
+    .login-box {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
+      color: #333;
+      margin: 100px auto;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    .error {
+      color: #e74c3c;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <!-- واجهة الترحيب -->
-  <div class="welcome-screen" id="welcome-screen">
-    <div class="welcome-content">
-      <div class="welcome-logo">🕌</div>
-      <h1 class="welcome-title">الرحمن</h1>
-      <div class="personal-greeting">محمد سعد يرحب بكم</div>
-      <p class="welcome-subtitle">تطبيق الأذكار والأدعية الشاملة الذي يساعدك على تذكر الله في كل وقت وحين</p>
-      <button class="start-btn" id="start-btn">ابدأ الآن</button>
+
+  <!-- صفحة تسجيل الدخول -->
+  <div id="loginPage" style="display:block;">
+    <div class="login-box">
+      <h2>تسجيل الدخول</h2>
+      <div class="input-group">
+        <label>اسم المستخدم</label>
+        <input type="text" id="username" placeholder="أدخل اسم المستخدم">
+      </div>
+      <div class="input-group">
+        <label>كلمة المرور</label>
+        <input type="password" id="password" placeholder="أدخل كلمة المرور">
+      </div>
+      <div id="errorMessage" class="error"></div>
+      <button onclick="login()">دخول</button>
     </div>
   </div>
-  <div class="header">
-    <div class="app-info">
-      <div class="app-logo">🕌</div>
-      <div>
-        <div class="app-name">الرحمن</div>
+
+  <!-- الواجهة الرئيسية -->
+  <div id="dashboardPage" style="display:none;">
+    <!-- شريط القمة -->
+    <div class="top-bar">
+      <div class="icons">
+        <div><i class="fa fa-phone"></i><span>إتصل بنا</span></div>
+        <div><i class="fa fa-cogs"></i><span>إعدادات</span></div>
+        <div><i class="fa fa-database"></i><span>المخزن</span></div>
+        <div><i class="fa fa-usd"></i><span>الخزنة</span></div>
+        <div><i class="fa fa-line-chart"></i><span>التقارير</span></div>
+        <div><i class="fa fa-list-alt"></i><span>عرض سعر</span></div>
+        <div><i class="fa fa-cart-plus"></i><span>المشتريات</span></div>
+        <div><i class="fa fa-cart-arrow-down"></i><span>المبيعات</span></div>
+        <div><i class="fa fa-folder-open"></i><span>الأصناف</span></div>
+        <div><i class="fa fa-motorcycle"></i><span>المناديب</span></div>
+        <div><i class="fa fa-group"></i><span>الموظفين</span></div>
+        <div><i class="fa fa-sitemap"></i><span>التفسيط</span></div>
+        <div><i class="fa fa-user-tie"></i><span>العملاء</span></div>
+        <div><i class="fa fa-box"></i><span>الموردين</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="status">يوجد أصناف وصلت للحد الأدنى</div>
+        <div class="exit-btn" id="exitBtn"><i class="fa fa-sign-out"></i> خروج</div>
       </div>
     </div>
-    <button class="counter-btn" id="counter-btn">عرف كام قرات</button>
-  </div>
-  <div class="main-container">
-    <h2 class="section-title">أذكار وأدعية</h2>
-    <div class="grid" id="cards-grid">
-      <div class="card" data-azkar="sabah">
-        <div class="counter-badge" id="badge-sabah">0</div>
-        أذكار الصباح
+
+    <!-- الواجهة الرئيسية -->
+    <div class="main-container">
+      <div class="tile" onclick="openPage('invoiceBuy')"><i class="fa fa-shopping-cart"></i><span>فاتورة شراء</span></div>
+      <div class="tile" onclick="openPage('invoiceSell')"><i class="fa fa-file-text"></i><span>فواتير البيع</span></div>
+      <div class="tile" onclick="openPage('invoiceQuick')"><i class="fa fa-credit-card"></i><span>فاتورة بيع سريع</span></div>
+      <div class="tile" onclick="openPage('invoiceNormal')"><i class="fa fa-shopping-cart"></i><span>فاتورة بيع عادي</span></div>
+      <div class="tile" onclick="openPage('cashPayment')"><i class="fa fa-money"></i><span>إضافة صرف نقدية</span></div>
+      <div class="tile" onclick="openPage('cashTransfer')"><i class="fa fa-credit-card"></i><span>إضافة تحويل نقدي</span></div>
+      <div class="tile" onclick="openPage('products')"><i class="fa fa-th-large"></i><span>الأصناف</span></div>
+      <div class="tile" onclick="openPage('stockInventory')"><i class="fa fa-archive"></i><span>جرد المخزن</span></div>
+      <div class="tile" onclick="openPage('suppliers')"><i class="fa fa-truck"></i><span>الموردين</span></div>
+      <div class="tile" onclick="openPage('agents')"><i class="fa fa-user"></i><span>المناديب</span></div>
+      <div class="tile" onclick="openPage('customers')"><i class="fa fa-users"></i><span>العملاء</span></div>
+      <div class="tile" onclick="openPage('priceList')"><i class="fa fa-clipboard"></i><span>عرض سعر</span></div>
+      <div class="tile" onclick="openPage('treasury')"><i class="fa fa-briefcase"></i><span>الخزنة</span></div>
+    </div>
+
+    <!-- شريط الحالة السفلي -->
+    <div class="footer">
+      <div class="footer-left">
+        <span>Smart-Soft 2023 © حقوق النشر</span>
+        <div class="icons-small">
+          <div class="icon-small">?</div>
+          <div class="icon-small">⚙️</div>
+          <div class="icon-small">🔔</div>
+        </div>
       </div>
-      <div class="card" data-azkar="msaa">
-        <div class="counter-badge" id="badge-msaa">0</div>
-        أذكار المساء
-      </div>
-      <div class="card" data-azkar="nom">
-        <div class="counter-badge" id="badge-nom">0</div>
-        أذكار النوم
-      </div>
-      <div class="card" data-azkar="istiqaz">
-        <div class="counter-badge" id="badge-istiqaz">0</div>
-        أذكار الاستيقاظ
-      </div>
-      <div class="card" data-azkar="baad_salat">
-        <div class="counter-badge" id="badge-baad_salat">0</div>
-        أذكار بعد الصلاة
-      </div>
-      <div class="card" data-azkar="tasabih">
-        <div class="counter-badge" id="badge-tasabih">0</div>
-        التسابيح
-      </div>
-      <div class="card" data-azkar="doaa">
-        <div class="counter-badge" id="badge-doaa">0</div>
-        جوامع الدعاء
-      </div>
-      <div class="card" data-azkar="salat">
-        <div class="counter-badge" id="badge-salat">0</div>
-        أذكار الصلاة
-      </div>
-      <div class="card" data-azkar="quran">
-        <div class="counter-badge" id="badge-quran">0</div>
-        الأدعية القرآنية
-      </div>
-      <div class="card" data-azkar="nabawi">
-        <div class="counter-badge" id="badge-nabawi">0</div>
-        أدعية نبوية
-      </div>
-      <div class="card" data-azkar="mutfarqa">
-        <div class="counter-badge" id="badge-mutfarqa">0</div>
-        أذكار متفرقة
-      </div>
-      <div class="card" data-azkar="anbiya">
-        <div class="counter-badge" id="badge-anbiya">0</div>
-        أدعية الأنبياء
-      </div>
-      <div class="card" data-azkar="masjid">
-        <div class="counter-badge" id="badge-masjid">0</div>
-        أذكار المسجد
-      </div>
-      <div class="card" data-azkar="athan">
-        <div class="counter-badge" id="badge-athan">0</div>
-        أذكار الآذان
-      </div>
-      <div class="card" data-azkar="manzel">
-        <div class="counter-badge" id="badge-manzel">0</div>
-        أذكار المنزل
-      </div>
-      <div class="card" data-azkar="wudu">
-        <div class="counter-badge" id="badge-wudu">0</div>
-        أذكار الوضوء
-      </div>
-      <div class="card" data-azkar="ta3am">
-        <div class="counter-badge" id="badge-ta3am">0</div>
-        أذكار الطعام
-      </div>
-      <div class="card" data-azkar="khala">
-        <div class="counter-badge" id="badge-khala">0</div>
-        أذكار الخلاء
-      </div>
-      <div class="card" data-azkar="safar">
-        <div class="counter-badge" id="badge-safar">0</div>
-        أذكار السفر
-      </div>
-      <div class="card" data-azkar="roya">
-        <div class="counter-badge" id="badge-roya">0</div>
-        أذكار الرؤيا
-      </div>
-      <div class="card" data-azkar="khatm">
-        <div class="counter-badge" id="badge-khatm">0</div>
-        أذكار ختم القرآن
-      </div>
-      <div class="card" data-azkar="istikhara">
-        <div class="counter-badge" id="badge-istikhara">0</div>
-        دعاء الاستخارة
-      </div>
-      <div class="card" data-azkar="qunoot">
-        <div class="counter-badge" id="badge-qunoot">0</div>
-        دعاء القنوت
-      </div>
-      <div class="card" data-azkar="istisqa">
-        <div class="counter-badge" id="badge-istisqa">0</div>
-        دعاء الاستسقاء
+      <div class="footer-right">
+        <div class="weather"><img src="https://i.imgur.com/7K6fXzL.jpg" alt="Weather" style="width:20px;height:20px;"> <span id="weather">27°C صافي غائمة</span></div>
+        <div class="icons-small">
+          <div class="icon-small">🕒</div>
+          <div class="icon-small">📅</div>
+          <div class="icon-small">💬</div>
+        </div>
       </div>
     </div>
-    <div class="azkar-content" id="azkar-content">
-      <h3 id="azkar-title"></h3>
-      <div id="azkar-text"></div>
-      <button class="back-btn" id="back-btn">العودة للقائمة</button>
+
+    <!-- نافذة التنبيه عند الخروج -->
+    <div class="modal" id="exitModal">
+      <div class="modal-content">
+        <h3>هل تريد الخروج؟</h3>
+        <p>ستفقد أي بيانات غير محفوظة.</p>
+        <div class="modal-buttons">
+          <button class="btn btn-yes" onclick="confirmExit()">نعم</button>
+          <button class="btn btn-no" onclick="closeModal()">لا</button>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="scroll-to-top">↑</div>
-  <!-- نافذة عرض العداد -->
-  <div class="counter-modal" id="counter-modal">
-    <div class="counter-content">
-      <h3>إحصائيات قراءة الأذكار</h3>
-      <div class="counter-list" id="counter-list"></div>
-      <button class="close-counter" id="close-counter">إغلاق</button>
+
+  <!-- الصفحات الداخلية -->
+  <div id="invoiceBuyPage" class="page-content">
+    <div class="header-page">
+      <h1>فاتورة شراء</h1>
+      <button class="back-btn" onclick="openPage('dashboard')">العودة للرئيسية</button>
+    </div>
+    <form id="invoiceBuyForm">
+      <div class="form-group">
+        <label>رقم الفاتورة</label>
+        <input type="text" id="invoiceBuyNum" required>
+      </div>
+      <div class="form-group">
+        <label>اسم المورد</label>
+        <select id="invoiceBuySupplier" required>
+          <option value="">اختر المورد</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>اسم الصنف</label>
+        <select id="invoiceBuyProduct" required>
+          <option value="">اختر الصنف</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>الكمية</label>
+        <input type="number" id="invoiceBuyQty" value="1" required>
+      </div>
+      <div class="form-group">
+        <label>السعر</label>
+        <input type="number" id="invoiceBuyPrice" step="0.01" required>
+      </div>
+      <button type="button" onclick="addInvoiceBuyItem()">إضافة للقائمة</button>
+    </form>
+
+    <h2 style="margin-top: 30px;">قائمة الأصناف في الفاتورة</h2>
+    <table id="invoiceBuyTable">
+      <thead>
+        <tr>
+          <th>الصنف</th>
+          <th>الكمية</th>
+          <th>السعر</th>
+          <th>الإجمالي</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <div style="margin-top: 20px;">
+      <button class="print-btn" onclick="printInvoice('buy')">طباعة الفاتورة</button>
+      <button onclick="saveInvoiceBuy()">حفظ الفاتورة</button>
     </div>
   </div>
+
+  <div id="productsPage" class="page-content">
+    <div class="header-page">
+      <h1>إدارة الأصناف</h1>
+      <button class="back-btn" onclick="openPage('dashboard')">العودة للرئيسية</button>
+    </div>
+    <h2>إضافة صنف جديد</h2>
+    <form id="productForm">
+      <div class="form-group">
+        <label>اسم الصنف</label>
+        <input type="text" id="productName" required>
+      </div>
+      <div class="form-group">
+        <label>السعر</label>
+        <input type="number" id="productPrice" step="0.01" required>
+      </div>
+      <div class="form-group">
+        <label>الكمية</label>
+        <input type="number" id="productQty" required>
+      </div>
+      <div class="form-group">
+        <label>الوحدة</label>
+        <select id="productUnit" required>
+          <option value="">اختر الوحدة</option>
+          <option value="قطعة">قطعة</option>
+          <option value="كيلو">كيلو</option>
+          <option value="لتر">لتر</option>
+          <option value="صندوق">صندوق</option>
+        </select>
+      </div>
+      <button type="submit">حفظ الصنف</button>
+    </form>
+
+    <h2 style="margin-top: 30px;">قائمة الأصناف</h2>
+    <table id="productsTable">
+      <thead>
+        <tr>
+          <th>الاسم</th>
+          <th>السعر</th>
+          <th>الكمية</th>
+          <th>الوحدة</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="customersPage" class="page-content">
+    <div class="header-page">
+      <h1>إدارة العملاء</h1>
+      <button class="back-btn" onclick="openPage('dashboard')">العودة للرئيسية</button>
+    </div>
+    <h2>إضافة عميل جديد</h2>
+    <form id="customerForm">
+      <div class="form-group">
+        <label>اسم العميل</label>
+        <input type="text" id="customerName" required>
+      </div>
+      <div class="form-group">
+        <label>الهاتف</label>
+        <input type="text" id="customerPhone">
+      </div>
+      <div class="form-group">
+        <label>العنوان</label>
+        <input type="text" id="customerAddress">
+      </div>
+      <button type="submit">حفظ العميل</button>
+    </form>
+
+    <h2 style="margin-top: 30px;">قائمة العملاء</h2>
+    <table id="customersTable">
+      <thead>
+        <tr>
+          <th>الاسم</th>
+          <th>الهاتف</th>
+          <th>العنوان</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="suppliersPage" class="page-content">
+    <div class="header-page">
+      <h1>إدارة الموردين</h1>
+      <button class="back-btn" onclick="openPage('dashboard')">العودة للرئيسية</button>
+    </div>
+    <h2>إضافة مورد جديد</h2>
+    <form id="supplierForm">
+      <div class="form-group">
+        <label>اسم المورد</label>
+        <input type="text" id="supplierName" required>
+      </div>
+      <div class="form-group">
+        <label>الهاتف</label>
+        <input type="text" id="supplierPhone">
+      </div>
+      <div class="form-group">
+        <label>العنوان</label>
+        <input type="text" id="supplierAddress">
+      </div>
+      <button type="submit">حفظ المورد</button>
+    </form>
+
+    <h2 style="margin-top: 30px;">قائمة الموردين</h2>
+    <table id="suppliersTable">
+      <thead>
+        <tr>
+          <th>الاسم</th>
+          <th>الهاتف</th>
+          <th>العنوان</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="treasuryPage" class="page-content">
+    <div class="header-page">
+      <h1>إدارة الخزنة</h1>
+      <button class="back-btn" onclick="openPage('dashboard')">العودة للرئيسية</button>
+    </div>
+    <h2>إضافة صرف نقدية</h2>
+    <form id="treasuryForm">
+      <div class="form-group">
+        <label>النوع</label>
+        <select id="treasuryType" required>
+          <option value="صرف">صرف</option>
+          <option value="إيداع">إيداع</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>المبلغ</label>
+        <input type="number" id="treasuryAmount" step="0.01" required>
+      </div>
+      <div class="form-group">
+        <label>السبب</label>
+        <input type="text" id="treasuryReason" required>
+      </div>
+      <button type="submit">حفظ العملية</button>
+    </form>
+
+    <h2 style="margin-top: 30px;">سجل العمليات</h2>
+    <table id="treasuryTable">
+      <thead>
+        <tr>
+          <th>التاريخ</th>
+          <th>النوع</th>
+          <th>المبلغ</th>
+          <th>السبب</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- الصفحات الأخرى (Invoice Sell, Quick, Normal, Cash Payment, Cash Transfer, Stock Inventory, Agents, Price List) -->
+  <!-- (نضيفها في الكود الكامل) -->
+
   <script>
-    const azkarData = {
-      sabah: {
-        title: "أذكار الصباح (من بعد الفجر إلى قبل الظهر)",
-        text: [
-          {text: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذَا الْيَوْمِ وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ.", count: 1},
-          {text: "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ.", count: 1},
-          {text: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.", count: 1},
-          {text: "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ ﷺ نَبِيًّا.", count: 3},
-          {text: "اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ، وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ.", count: 1},
-          {text: "حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.", count: 7},
-          {text: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ.", count: 3},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحُزْنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ، وَغَلَبَةِ الرِّجَالِ.", count: 1},
-          {text: "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.", count: 3},
-          {text: "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ، وَعَلَى آلِ سَيِّدِنَا مُحَمَّدٍ، كَمَا صَلَّيْتَ وَسَلَّمْتَ عَلَى سَيِّدِنَا إِبْرَاهِيمَ، وَعَلَى آلِ سَيِّدِنَا إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ.", count: 10},
-          {text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", count: 10},
-          {text: "سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ.", count: 10},
-          {text: "يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ.", count: 3},
-          {text: "أَصْبَحْتُ أَعُوذُ بِاللَّهِ السَّمِيعِ الْعَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ مِنْ هَمْزِهِ وَنَفْخِهِ وَنَفْثِهِ.", count: 3},
-          {text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَعُوذُ بِكَ مِنَ النَّارِ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ.", count: 1},
-          {text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ.", count: 3},
-          {text: "اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ.", count: 3}
-        ]
-      },
-      msaa: {
-        title: "أذكار المساء (من بعد العصر إلى قبل الفجر)",
-        text: [
-          {text: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ.", count: 1},
-          {text: "اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ.", count: 1},
-          {text: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.", count: 1},
-          {text: "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ ﷺ نَبِيًّا.", count: 3},
-          {text: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ.", count: 3},
-          {text: "حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.", count: 7},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحُزْنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ، وَغَلَبَةِ الرِّجَالِ.", count: 1},
-          {text: "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.", count: 3},
-          {text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", count: 10},
-          {text: "سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ.", count: 10},
-          {text: "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ، وَعَلَى آلِ سَيِّدِنَا مُحَمَّدٍ، كَمَا صَلَّيْتَ وَسَلَّمْتَ عَلَى سَيِّدِنَا إِبْرَاهِيمَ، وَعَلَى آلِ سَيِّدِنَا إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ.", count: 10},
-          {text: "يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ.", count: 3},
-          {text: "أَمْسَيْتُ أَعُوذُ بِاللَّهِ السَّمِيعِ الْعَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ مِنْ هَمْزِهِ وَنَفْخِهِ وَنَفْثِهِ.", count: 3},
-          {text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَعُوذُ بِكَ مِنَ النَّارِ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ.", count: 1},
-          {text: "اللَّهُمَّ بِكَ أَمْسَيْنَا وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ.", count: 1},
-          {text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ.", count: 3}
-        ]
-      },
-      nom: {
-        title: "أذكار النوم",
-        text: [
-          {text: "بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ، فَإِنْ أَمْسَكْتَ نَفْسِي فَارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ.", count: 1},
-          {text: "اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ.", count: 3},
-          {text: "اللَّهُمَّ إِنَّكَ خَلَقْتَ نَفْسِي وَأَنْتَ تَوَفَّاهَا، لَكَ مَمَاتُهَا وَمَحْيَاهَا، إِنْ أَحْيَيْتَهَا فَاحْفَظْهَا، وَإِنْ أَمَتَّهَا فَاغْفِرْ لَهَا. اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ الْهَمِّ وَالْحُزْنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ، وَغَلَبَةِ الرِّجَالِ.", count: 1},
-          {text: "سُبْحَانَ اللَّهِ (33)، الْحَمْدُ لِلَّهِ (33)، اللَّهُ أَكْبَرُ (34).", count: 1},
-          {text: "آمَنْتُ بِاللَّهِ وَبِرُسُلِهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", count: 1},
-          {text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَلَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ.", count: 1},
-          {text: "اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ، وَوَجَّهْتُ وَجْهِي إِلَيْكَ، وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ، رَغْبَةً وَرَهْبَةً إِلَيْكَ، لَا مَلْجَأَ وَلَا مَنْجَى مِنْكَ إِلَّا إِلَيْكَ، آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ وَبِنَبِيِّكَ الَّذِي أَرْسَلْتَ.", count: 1},
-          {text: "قُلْ هُوَ اللَّهُ أَحَدٌ، وَقُلْ يَا أَيُّهَا الْكَافِرُونَ، وَآيَةُ الْكُرْسِيّ، وَالْمُعَوِّذَتَيْنِ.", count: 1},
-          {text: "بِاسْمِكَ اللَّهُمَّ أَحْيَا وَأَمُوتُ.", count: 1},
-          {text: "اللَّهُمَّ رَبَّ السَّمَاوَاتِ وَرَبَّ الْأَرْضِ وَرَبَّ الْعَرْشِ الْعَظِيمِ، رَبَّنَا وَرَبَّ كُلِّ شَيْءٍ، فَالِقَ الْحَبِّ وَالنَّوَى، وَمُنْزِلَ التَّوْرَاةِ وَالْإِنْجِيلِ وَالْفُرْقَانِ، أَعُوذُ بِكَ مِنْ شَرِّ كُلِّ شَيْءٍ أَنْتَ آخِذٌ بِنَاصِيَتِهِ.", count: 1},
-          {text: "اللَّهُمَّ أَسْلَمْتُ وَجْهِي إِلَيْكَ، وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ، رَغْبَةً وَرَهْبَةً إِلَيْكَ، لَا مَلْجَأَ وَلَا مَنْجَا مِنْكَ إِلَّا إِلَيْكَ، آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ، وَبِنَبِيِّكَ الَّذِي أَرْسَلْتَ.", count: 1}
-        ]
-      },
-      istiqaz: {
-        title: "أذكار الاستيقاظ",
-        text: [
-          {text: "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ.", count: 1},
-          {text: "الْحَمْدُ لِلَّهِ الَّذِي عَافَانِي فِي جَسَدِي، وَرَدَّ عَلَيَّ رُوحِي، وَأَذِنَ لِي بِذِكْرِهِ.", count: 1},
-          {text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَلَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ ضِيقِ الدُّنْيَا وَضِيقِ يَوْمِ الْقِيَامَةِ.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ مَا فِي هَذَا الْيَوْمِ وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ.", count: 1}
-        ]
-      },
-      baad_salat: {
-        title: "أذكار بعد الصلاة",
-        text: [
-          {text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", count: 10},
-          {text: "لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ.", count: 10},
-          {text: "لَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ، وَالْحَمْدُ لِلَّهِ.", count: 10},
-          {text: "سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ.", count: 10},
-          {text: "آيَةُ الْكُرْسِيّ.", count: 1},
-          {text: "قُلْ هُوَ اللَّهُ أَحَدٌ، وَالْمُعَوِّذَتَيْنِ.", count: 3},
-          {text: "أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ.", count: 3},
-          {text: "اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ.", count: 1},
-          {text: "اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ.", count: 1},
-          {text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ.", count: 1}
-        ]
-      },
-      tasabih: {
-        title: "التسابيح (أذكار الصباح والمساء والنوافل)",
-        text: [
-          {text: "سُبْحَانَ اللَّهِ (33 مرة)، الْحَمْدُ لِلَّهِ (33 مرة)، اللَّهُ أَكْبَرُ (34 مرة).", count: 1},
-          {text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ.", count: 100},
-          {text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", count: 100},
-          {text: "لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ.", count: 100},
-          {text: "حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ، عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.", count: 7},
-          {text: "يَا حَيُّ يَا قَيُّومُ، بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ.", count: 3},
-          {text: "رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ.", count: 100},
-          {text: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ.", count: 10}
-        ]
-      },
-      doaa: {
-        title: "جوامع الدعاء",
-        text: [
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ جَهَنَّمَ، وَمِنْ عَذَابِ الْقَبْرِ، وَمِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ، وَمِنْ شَرِّ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى.", count: 1},
-          {text: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ.", count: 1},
-          {text: "اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَاهْدِنِي وَعَافِنِي وَارْزُقْنِي.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ سَمْعِي، وَمِنْ شَرِّ بَصَرِي، وَمِنْ شَرِّ لِسَانِي، وَمِنْ شَرِّ قَلْبِي، وَمِنْ شَرِّ مَنِيِّي.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَمِنْ شَرِّ كُلِّ دَابَّةٍ أَنْتَ آخِذٌ بِنَاصِيَتِهَا، إِنَّ رَبِّي عَلَى صِرَاطٍ مُسْتَقِيمٍ.", count: 1}
-        ]
-      },
-      salat: {
-        title: "أذكار الصلاة",
-        text: [
-          {text: "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، وَتَبَارَكَ اسْمُكَ، وَتَعَالَى جَدُّكَ، وَلَا إِلَهَ غَيْرُكَ.", count: 1},
-          {text: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ.", count: 1},
-          {text: "اللَّهُ أَكْبَرُ كَبِيرًا، وَالْحَمْدُ لِلَّهِ كَثِيرًا، وَسُبْحَانَ اللَّهِ بُكْرَةً وَأَصِيلًا.", count: 1},
-          {text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", count: 1},
-          {text: "اللَّهُمَّ اغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ، وَمَا أَسْرَرْتُ وَمَا أَعْلَنْتُ، وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي، أَنْتَ الْمُقَدِّمُ وَأَنْتَ الْمُؤَخِّرُ، لَا إِلَهَ إِلَّا أَنْتَ.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا، وَلَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ، فَاغْفِرْ لِي مَغْفِرَةً مِنْ عِنْدِكَ، وَارْحَمْنِي إِنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ.", count: 1}
-        ]
-      },
-      quran: {
-        title: "الأدعية القرآنية",
-        text: [
-          {text: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ. (البقرة: 201)", count: 1},
-          {text: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً ۚ إِنَّكَ أَنتَ الْوَهَّابُ. (آل عمران: 8)", count: 1},
-          {text: "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِّن لِّسَانِي يَفْقَهُوا قَوْلِي. (طه: 25-28)", count: 1},
-          {text: "رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ. (القصص: 24)", count: 1},
-          {text: "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ. (إبراهيم: 41)", count: 1},
-          {text: "رَبَّنَا اصْرِفْ عَنَّا عَذَابَ جَهَنَّمَ ۖ إِنَّ عَذَابَهَا كَانَ غَرَامًا. (الفرقان: 65)", count: 1},
-          {text: "رَبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ وَاجْعَل لِّي مِن لَّدُنكَ سُلْطَانًا نَّصِيرًا. (الإسراء: 80)", count: 1}
-        ]
-      },
-      nabawi: {
-        title: "أدعية نبوية",
-        text: [
-          {text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ سَمْعِي، وَمِنْ شَرِّ بَصَرِي، وَمِنْ شَرِّ لِسَانِي، وَمِنْ شَرِّ قَلْبِي، وَمِنْ شَرِّ مَنِيِّي.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ.", count: 1},
-          {text: "اللَّهُمَّ مَتِّعْنِي بِسَمْعِي وَبَصَرِي وَاجْعَلْهُمَا الْوَارِثَ مِنِّي، وَانْصُرْنِي عَلَى مَنْ ظَلَمَنِي، وَخُذْ لِي بِثَأْرِي.", count: 1},
-          {text: "اللَّهُمَّ طَهِّرْ قَلْبِي مِنَ النِّفَاقِ، وَعَمَلِي مِنَ الرِّيَاءِ، وَلِسَانِي مِنَ الْكَذِبِ، وَعَيْنِي مِنَ الْخِيَانَةِ، إِنَّكَ تَعْلَمُ خَائِنَةَ الْأَعْيُنِ وَمَا تُخْفِي الصُّدُورُ.", count: 1}
-        ]
-      },
-      mutfarqa: {
-        title: "أذكار متفرقة",
-        text: [
-          {text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ مَا خَلَقْتَ.", count: 1},
-          {text: "لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ.", count: 100},
-          {text: "اللَّهُمَّ اغْفِرْ لِي ذَنْبِي كُلَّهُ، دِقَّهُ وَجِلَّهُ، وَأَوَّلَهُ وَآخِرَهُ، وَعَلَانِيَتَهُ وَسِرَّهُ.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ مَا سَأَلَكَ مِنْهُ عِبَادُكَ الصَّالِحُونَ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا اسْتَعَاذَ مِنْهُ عِبَادُكَ الصَّالِحُونَ.", count: 1},
-          {text: "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ.", count: 3}
-        ]
-      },
-      anbiya: {
-        title: "أدعية الأنبياء",
-        text: [
-          {text: "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِّن لِّسَانِي يَفْقَهُوا قَوْلِي. (موسى عليه السلام)", count: 1},
-          {text: "رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ. (موسى عليه السلام)", count: 1},
-          {text: "رَبِّ ابْنِ لِي عِندَكَ بَيْتًا فِي الْجَنَّةِ وَنَجِّنِي مِن فِرْعَوْنَ وَعَمَلِهِ. (آسية رضي الله عنها)", count: 1},
-          {text: "رَبِّ هَبْ لِي مِن لَّدُنكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ. (زكريا عليه السلام)", count: 1},
-          {text: "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ. (سليمان عليه السلام)", count: 1},
-          {text: "حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ. (نوح عليه السلام)", count: 7}
-        ]
-      },
-      masjid: {
-        title: "أذكار المسجد",
-        text: [
-          {text: "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ.", count: 1},
-          {text: "أَعُوذُ بِاللَّهِ الْعَظِيمِ، وَبِوَجْهِهِ الْكَرِيمِ، وَسُلْطَانِهِ الْقَدِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ.", count: 1},
-          {text: "اللَّهُمَّ اغْفِرْ لِي ذُنُوبِي، وَافْتَحْ لِي أَبْوَابَ رَحْمَتِكَ.", count: 1},
-          {text: "سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَلَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ.", count: 10},
-          {text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", count: 10}
-        ]
-      },
-      athan: {
-        title: "أذكار الآذان",
-        text: [
-          {text: "اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلَاةِ الْقَائِمَةِ، آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ.", count: 1},
-          {text: "وَرَضِيتُ بِاللَّهِ رَبًّا، وَبِمُحَمَّدٍ رَسُولًا، وَبِالْإِسْلَامِ دِينًا.", count: 1},
-          {text: "لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ.", count: 10},
-          {text: "مَنْ قَالَ حِينَ يَسْمَعُ النِّدَاءَ: وَأَنَا أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ، رَضِيتُ بِاللَّهِ رَبًّا، وَبِمُحَمَّدٍ رَسُولًا، وَبِالْإِسْلَامِ دِينًا، غُفِرَ لَهُ ذَنْبُهُ.", count: 1},
-          {text: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ.", count: 10}
-        ]
-      },
-      manzel: {
-        title: "أذكار المنزل",
-        text: [
-          {text: "بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى رَبِّنَا تَوَكَّلْنَا.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ مَا خَلَقْتَ.", count: 1},
-          {text: "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ شَرِّ مَا خَلَقَ.", count: 3},
-          {text: "اللَّهُمَّ بَارِكْ لَنَا فِي بُيُوتِنَا، وَفِي أَمْوَالِنَا، وَفِي أَهْلِنَا، وَفِي أَوْلَادِنَا، وَبَارِكْ لَنَا فِيمَا رَزَقْتَنَا.", count: 1},
-          {text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", count: 10}
-        ]
-      },
-      wudu: {
-        title: "أذكار الوضوء",
-        text: [
-          {text: "بِسْمِ اللَّهِ.", count: 1},
-          {text: "اللَّهُمَّ اغْفِرْ لِي ذَنْبِي، وَوَسِّعْ لِي فِي دَارِي، وَبَارِكْ لِي فِيمَا رَزَقْتَنِي.", count: 1},
-          {text: "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ.", count: 1},
-          {text: "اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ، وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ.", count: 1},
-          {text: "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ.", count: 1}
-        ]
-      },
-      ta3am: {
-        title: "أذكار الطعام",
-        text: [
-          {text: "بِسْمِ اللَّهِ.", count: 1},
-          {text: "اللَّهُمَّ بَارِكْ لَنَا فِيهِ، وَأَطْعِمْنَا خَيْرًا مِنْهُ.", count: 1},
-          {text: "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا، وَجَعَلَنَا مِنَ الْمُسْلِمِينَ.", count: 1},
-          {text: "الْحَمْدُ لِلَّهِ حَمْدًا كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ، غَيْرَ مَكْفِيٍّ وَلَا مُوَدَّعٍ وَلَا مُسْتَغْنًى عَنْهُ رَبَّنَا.", count: 1},
-          {text: "اللَّهُمَّ أَطْعِمْ مَنْ أَطْعَمَنِي، وَاسْقِ مَنْ سَقَانِي.", count: 1}
-        ]
-      },
-      khala: {
-        title: "أذكار الخلاء",
-        text: [
-          {text: "بِسْمِ اللَّهِ.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ.", count: 1},
-          {text: "غُفْرَانَكَ.", count: 1},
-          {text: "الْحَمْدُ لِلَّهِ الَّذِي أَذْهَبَ عَنِّي الْأَذَى وَعَافَانِي.", count: 1},
-          {text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", count: 1}
-        ]
-      },
-      safar: {
-        title: "أذكار السفر",
-        text: [
-          {text: "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ.", count: 1},
-          {text: "اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى.", count: 1},
-          {text: "اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ.", count: 1},
-          {text: "اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ، وَالْخَلِيفَةُ فِي الْأَهْلِ.", count: 1},
-          {text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ.", count: 1}
-        ]
-      },
-      roya: {
-        title: "أذكار الرؤيا",
-        text: [
-          {text: "اللَّهُمَّ إِنِّي رَأَيْتُ رُؤْيَا، فَاصْرِفْهَا عَنِّي خَيْرًا.", count: 1},
-          {text: "الْحَمْدُ لِلَّهِ الَّذِي بِيَدِهِ مَلَكُوتُ كُلِّ شَيْءٍ وَإِلَيْهِ يُرْجَعُونَ.", count: 1},
-          {text: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ، وَأَعُوذُ بِاللَّهِ مِنْ شَرِّ مَا أَرَى.", count: 1},
-          {text: "اللَّهُمَّ إِنْ كَانَتْ خَيْرًا فَخَيْرٌ، وَإِنْ كَانَتْ شَرًّا فَاصْرِفْهَا عَنِّي.", count: 1},
-          {text: "لَا يُعَبِّرُ الرُّؤْيَا إِلَّا عَالِمٌ أَوْ نَاصِحٌ أَوْ حَبِيبٌ.", count: 1}
-        ]
-      },
-      khatm: {
-        title: "أذكار ختم القرآن",
-        text: [
-          {text: "اللَّهُمَّ ارْحَمْنِي بِالْقُرْآنِ وَاجْعَلْهُ لِي إِمَامًا وَنُورًا وَهُدًى وَرَحْمَةً.", count: 1},
-          {text: "اللَّهُمَّ ذَكِّرْنِي مِنْهُ مَا نَسِيتُ، وَعَلِّمْنِي مِنْهُ مَا جَهِلْتُ، وَارْزُقْنِي تِلَاوَتَهُ آنَاءَ اللَّيْلِ وَأَطْرَافَ النَّهَارِ.", count: 1},
-          {text: "اللَّهُمَّ اجْعَلِ الْقُرْآنَ رَبِيعَ قَلْبِي، وَنُورَ صَدْرِي، وَجَلَاءَ حُزْنِي، وَذَهَابَ هَمِّي.", count: 1},
-          {text: "سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُونَ، وَسَلَامٌ عَلَى الْمُرْسَلِينَ، وَالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ.", count: 1},
-          {text: "اللَّهُمَّ اجْعَلْنِي مِنْ أَهْلِ الْقُرْآنِ الَّذِينَ هُمْ أَهْلُكَ وَخَاصَّتُكَ.", count: 1}
-        ]
-      },
-      istikhara: {
-        title: "دعاء الاستخارة",
-        text: [
-          {text: "اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ، فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ.", count: 1},
-          {text: "اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ خَيْرٌ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي، فَاقْدُرْهُ لِي وَيَسِّرْهُ لِي، ثُمَّ بَارِكْ لِي فِيهِ.", count: 1},
-          {text: "وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي، فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ، وَاقْدُرْ لِي الْخَيْرَ حَيْثُ كَانَ، ثُمَّ أَرْضِنِي بِهِ.", count: 1}
-        ]
-      },
-      qunoot: {
-        title: "دعاء القنوت",
-        text: [
-          {text: "اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ، وَعَافِنِي فِيمَنْ عَافَيْتَ، وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ، وَبَارِكْ لِي فِيمَا أَعْطَيْتَ، وَقِنِي شَرَّ مَا قَضَيْتَ، فَإِنَّكَ تَقْضِي وَلَا يُقْضَى عَلَيْكَ، وَإِنَّهُ لَا يَذِلُّ مَنْ وَالَيْتَ، وَلَا يَعِزُّ مَنْ عَادَيْتَ، تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ.", count: 1},
-          {text: "اللَّهُمَّ إِنَّا نَسْتَعِينُكَ وَنَسْتَغْفِرُكَ، وَنُؤْمِنُ بِكَ وَنَتَوَكَّلُ عَلَيْكَ، وَنُثْنِي عَلَيْكَ الْخَيْرَ كُلَّهُ، وَنَشْكُرُكَ وَلَا نَكْفُرُكَ، وَنَخْلَعُ وَنَتْرُكُ مَنْ يَفْجُرُكَ.", count: 1},
-          {text: "اللَّهُمَّ إِيَّاكَ نَعْبُدُ، وَلَكَ نُصَلِّي وَنَسْجُدُ، وَإِلَيْكَ نَسْعَى وَنَحْفِدُ، نَرْجُو رَحْمَتَكَ وَنَخْشَى عَذَابَكَ، إِنَّ عَذَابَكَ بِالْكُفَّارِ مُلْحِقٌ.", count: 1}
-        ]
-      },
-      istisqa: {
-        title: "دعاء الاستسقاء",
-        text: [
-          {text: "اللَّهُمَّ اسْقِنَا غَيْثًا مُغِيثًا مَرِيئًا مَرِيعًا نَافِعًا غَيْرَ ضَارٍّ، عَاجِلًا غَيْرَ آجِلٍ.", count: 1},
-          {text: "اللَّهُمَّ اسْقِ عِبَادَكَ وَبَهَائِمَكَ، وَانْشُرْ رَحْمَتَكَ، وَأَحْيِ بَلَدَكَ الْمَيِّتَ.", count: 1},
-          {text: "اللَّهُمَّ أَغِثْنَا، اللَّهُمَّ أَغِثْنَا، اللَّهُمَّ أَغِثْنَا.", count: 3},
-          {text: "اللَّهُمَّ اسْقِنَا مِنْ بَرَكَاتِ السَّمَاءِ، وَأَنْبِتْ لَنَا مِنْ بَرَكَاتِ الْأَرْضِ، وَاكْشِفْ عَنَّا مِنَ الْبَلَاءِ مَا لَا يَكْشِفُهُ غَيْرُكَ.", count: 1},
-          {text: "اللَّهُمَّ إِنَّ بِالْعِبَادِ وَالْبِلَادِ مِنَ اللَّأْوَاءِ وَالْجَهْدِ وَالْضَّنَكِ مَا لَا نَشْكُوهُ إِلَّا إِلَيْكَ.", count: 1}
-        ]
-      }
-    };
-    // تهيئة العدادات من localStorage
-    let counters = JSON.parse(localStorage.getItem('azkarCounters')) || {};
-    let azkarIndividualCounters = JSON.parse(localStorage.getItem('azkarIndividualCounters')) || {};
-    // إخفاء واجهة الترحيب
-    document.getElementById('start-btn').addEventListener('click', function() {
-      document.getElementById('welcome-screen').style.transform = 'translateY(-100%)';
-      document.getElementById('welcome-screen').style.opacity = '0';
-      setTimeout(() => {
-        document.getElementById('welcome-screen').style.display = 'none';
-      }, 800);
-    });
-    // تحديث العلامات على البطاقات
-    function updateBadges() {
-      Object.keys(counters).forEach(key => {
-        const badge = document.getElementById(`badge-${key}`);
-        if (badge) {
-          badge.textContent = counters[key];
-        }
-      });
+    // التحقق من تسجيل الدخول
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      document.getElementById('loginPage').style.display = 'block';
+      document.getElementById('dashboardPage').style.display = 'none';
+    } else {
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('dashboardPage').style.display = 'block';
     }
 
-    // === الدالة الجديدة لربط أزرار القراءة ===
-    function attachIncreaseButtonListeners() {
-      document.querySelectorAll('.increase-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const itemId = this.getAttribute('data-item');
-          const requiredCount = parseInt(this.getAttribute('data-required'));
-          const azkarItem = this.closest('.azkar-item');
-          const completionMessage = azkarItem.querySelector('.completion-message');
-          if (!azkarIndividualCounters[itemId]) {
-            azkarIndividualCounters[itemId] = 0;
-          }
-          azkarIndividualCounters[itemId]++;
-          const key = itemId.split('-')[0];
-          if (!counters[key]) {
-            counters[key] = 0;
-          }
-          counters[key]++;
-          localStorage.setItem('azkarCounters', JSON.stringify(counters));
-          localStorage.setItem('azkarIndividualCounters', JSON.stringify(azkarIndividualCounters));
-          updateBadges();
-          if (azkarIndividualCounters[itemId] >= requiredCount) {
-            this.style.display = 'none';
-            const counterDisplay = document.createElement('div');
-            counterDisplay.className = 'counter-display';
-            counterDisplay.textContent = `أكملت ${requiredCount} مرة`;
-            azkarItem.querySelector('.azkar-counter').appendChild(counterDisplay);
-            completionMessage.style.opacity = '1';
-          } else {
-            this.textContent = `قرأت هذا الذكر (${azkarIndividualCounters[itemId]}/${requiredCount})`;
-            completionMessage.style.opacity = '1';
-            setTimeout(() => {
-              if (azkarIndividualCounters[itemId] < requiredCount) {
-                completionMessage.style.opacity = '0';
-              }
-            }, 2000);
-          }
-        });
-      });
-    }
+    // تسجيل الدخول
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorMessage = document.getElementById('errorMessage');
 
-    // تحديث العداد عند النقر على بطاقة
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('click', () => {
-        const key = card.getAttribute('data-azkar');
-        const data = azkarData[key];
-        if (data) {
-          document.getElementById('azkar-title').textContent = data.title;
-          const azkarTextContainer = document.getElementById('azkar-text');
-          azkarTextContainer.innerHTML = '';
-          data.text.forEach((item, index) => {
-            const itemId = `${key}-${index}`;
-            const currentCount = azkarIndividualCounters[itemId] || 0;
-            const requiredCount = item.count || 1;
-            const isCompleted = currentCount >= requiredCount;
-            const azkarItem = document.createElement('div');
-            azkarItem.className = 'azkar-item';
-            let azkarItemHTML = `
-              <div>${item.text}</div>
-              <div class="repeat-counter">
-                <span class="repeat-label">عدد المرات المطلوبة: ${requiredCount}</span>
-              </div>
-              <div class="azkar-counter">
-            `;
-            if (isCompleted) {
-              azkarItemHTML += `
-                <div class="counter-display">أكملت ${requiredCount} مرة</div>
-              `;
-            } else {
-              azkarItemHTML += `
-                <button class="increase-btn" data-item="${itemId}" data-required="${requiredCount}">قرأت هذا الذكر (${currentCount}/${requiredCount})</button>
-              `;
-            }
-            azkarItemHTML += `
-              </div>
-              <div class="completion-message" style="opacity: ${isCompleted ? '1' : '0'};">✓ تمت القراءة</div>
-            `;
-            azkarItem.innerHTML = azkarItemHTML;
-            azkarTextContainer.appendChild(azkarItem);
-          });
-
-          // === استدعاء الدالة هنا بعد إنشاء الأزرار ===
-          attachIncreaseButtonListeners();
-
-          document.getElementById('cards-grid').style.display = 'none';
-          document.getElementById('azkar-content').style.display = 'block';
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      });
-    });
-
-    // زر العودة
-    document.getElementById('back-btn').addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('azkar-content').style.display = 'none';
-      document.getElementById('cards-grid').style.display = 'grid';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // باقي الأحداث كما هي
-    const scrollToTop = document.querySelector('.scroll-to-top');
-    scrollToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        scrollToTop.style.opacity = '1';
-        scrollToTop.style.pointerEvents = 'auto';
+      if (username === "admin" && password === "1234") {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('username', username);
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('dashboardPage').style.display = 'block';
       } else {
-        scrollToTop.style.opacity = '0';
-        scrollToTop.style.pointerEvents = 'none';
+        errorMessage.textContent = "اسم المستخدم أو كلمة المرور غير صحيحة";
+      }
+    }
+
+    // الخروج
+    document.getElementById('exitBtn').addEventListener('click', function() {
+      document.getElementById('exitModal').style.display = 'flex';
+    });
+
+    function closeModal() {
+      document.getElementById('exitModal').style.display = 'none';
+    }
+
+    function confirmExit() {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('username');
+      window.location.href = 'system.html';
+    }
+
+    document.getElementById('exitModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
       }
     });
-    document.getElementById('counter-btn').addEventListener('click', () => {
-      const modal = document.getElementById('counter-modal');
-      const list = document.getElementById('counter-list');
-      list.innerHTML = '';
-      Object.keys(counters).forEach(key => {
-        if (counters[key] > 0) {
-          const item = document.createElement('div');
-          item.className = 'counter-item';
-          item.innerHTML = `
-            <span>${azkarData[key]?.title || key}</span>
-            <span>${counters[key]} مرة</span>
-          `;
-          list.appendChild(item);
-        }
+
+    // فتح صفحة داخلية
+    function openPage(pageName) {
+      // إخفاء كل الصفحات
+      document.querySelectorAll('.page-content').forEach(page => {
+        page.classList.remove('active');
       });
-      if (list.children.length === 0) {
-        list.innerHTML = '<div class="counter-item">لم تقرأ أي أذكار بعد</div>';
+
+      // إخفاء الواجهة الرئيسية
+      document.getElementById('dashboardPage').style.display = 'none';
+
+      // عرض الصفحة المطلوبة
+      document.getElementById(pageName + 'Page').classList.add('active');
+    }
+
+    // عودة للواجهة الرئيسية
+    function backToDashboard() {
+      document.getElementById('dashboardPage').style.display = 'block';
+      document.querySelectorAll('.page-content').forEach(page => {
+        page.classList.remove('active');
+      });
+    }
+
+    // تحديث الوقت والطقس
+    function updateFooter() {
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('ar-SA');
+      const timeStr = now.toLocaleTimeString('ar-SA');
+      document.querySelector('.footer-right .icons-small div:nth-child(1)').textContent = timeStr;
+      document.querySelector('.footer-right .icons-small div:nth-child(2)').textContent = dateStr;
+
+      const weatherData = ["27°C صافي غائمة", "25°C ممطر", "30°C مشمس"];
+      const randomWeather = weatherData[Math.floor(Math.random() * weatherData.length)];
+      document.getElementById('weather').textContent = randomWeather;
+    }
+
+    setInterval(updateFooter, 1000);
+    updateFooter();
+
+    // --- تخزين البيانات --- //
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    let customers = JSON.parse(localStorage.getItem('customers')) || [];
+    let suppliers = JSON.parse(localStorage.getItem('suppliers')) || [];
+    let treasury = JSON.parse(localStorage.getItem('treasury')) || [];
+    let invoices = JSON.parse(localStorage.getItem('invoices')) || { buy: [], sell: [] };
+
+    // --- إدارة الأصناف --- //
+    function renderProducts() {
+      const tableBody = document.querySelector('#productsTable tbody');
+      tableBody.innerHTML = '';
+
+      products.forEach((product, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${product.name}</td>
+          <td>${product.price}</td>
+          <td>${product.qty}</td>
+          <td>${product.unit}</td>
+          <td class="actions">
+            <button class="edit-btn" onclick="editProduct(${index})">تعديل</button>
+            <button class="delete-btn" onclick="deleteProduct(${index})">حذف</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    document.getElementById('productForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('productName').value.trim();
+      const price = parseFloat(document.getElementById('productPrice').value);
+      const qty = parseInt(document.getElementById('productQty').value);
+      const unit = document.getElementById('productUnit').value;
+
+      if (!name || isNaN(price) || isNaN(qty) || !unit) {
+        alert("يرجى ملء جميع الحقول بشكل صحيح");
+        return;
       }
-      modal.style.display = 'flex';
+
+      products.push({ name, price, qty, unit });
+      localStorage.setItem('products', JSON.stringify(products));
+      renderProducts();
+      this.reset();
     });
-    document.getElementById('close-counter').addEventListener('click', () => {
-      document.getElementById('counter-modal').style.display = 'none';
-    });
-    window.addEventListener('click', (e) => {
-      const modal = document.getElementById('counter-modal');
-      if (e.target === modal) {
-        modal.style.display = 'none';
+
+    function deleteProduct(index) {
+      if (confirm("هل أنت متأكد من حذف هذا الصنف؟")) {
+        products.splice(index, 1);
+        localStorage.setItem('products', JSON.stringify(products));
+        renderProducts();
       }
+    }
+
+    function editProduct(index) {
+      const product = products[index];
+      document.getElementById('productName').value = product.name;
+      document.getElementById('productPrice').value = product.price;
+      document.getElementById('productQty').value = product.qty;
+      document.getElementById('productUnit').value = product.unit;
+
+      products.splice(index, 1);
+      document.getElementById('productForm').onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('productName').value.trim();
+        const price = parseFloat(document.getElementById('productPrice').value);
+        const qty = parseInt(document.getElementById('productQty').value);
+        const unit = document.getElementById('productUnit').value;
+
+        if (!name || isNaN(price) || isNaN(qty) || !unit) {
+          alert("يرجى ملء جميع الحقول بشكل صحيح");
+          return;
+        }
+
+        products.push({ name, price, qty, unit });
+        localStorage.setItem('products', JSON.stringify(products));
+        renderProducts();
+        this.reset();
+        resetProductFormSubmit();
+      };
+    }
+
+    function resetProductFormSubmit() {
+      document.getElementById('productForm').onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('productName').value.trim();
+        const price = parseFloat(document.getElementById('productPrice').value);
+        const qty = parseInt(document.getElementById('productQty').value);
+        const unit = document.getElementById('productUnit').value;
+
+        if (!name || isNaN(price) || isNaN(qty) || !unit) {
+          alert("يرجى ملء جميع الحقول بشكل صحيح");
+          return;
+        }
+
+        products.push({ name, price, qty, unit });
+        localStorage.setItem('products', JSON.stringify(products));
+        renderProducts();
+        this.reset();
+      };
+    }
+
+    // --- إدارة العملاء --- //
+    function renderCustomers() {
+      const tableBody = document.querySelector('#customersTable tbody');
+      tableBody.innerHTML = '';
+
+      customers.forEach((customer, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${customer.name}</td>
+          <td>${customer.phone || ''}</td>
+          <td>${customer.address || ''}</td>
+          <td class="actions">
+            <button class="edit-btn" onclick="editCustomer(${index})">تعديل</button>
+            <button class="delete-btn" onclick="deleteCustomer(${index})">حذف</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    document.getElementById('customerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('customerName').value.trim();
+      const phone = document.getElementById('customerPhone').value.trim();
+      const address = document.getElementById('customerAddress').value.trim();
+
+      if (!name) {
+        alert("الاسم مطلوب");
+        return;
+      }
+
+      customers.push({ name, phone, address });
+      localStorage.setItem('customers', JSON.stringify(customers));
+      renderCustomers();
+      this.reset();
     });
-    updateBadges();
+
+    function deleteCustomer(index) {
+      if (confirm("هل أنت متأكد من حذف هذا العميل؟")) {
+        customers.splice(index, 1);
+        localStorage.setItem('customers', JSON.stringify(customers));
+        renderCustomers();
+      }
+    }
+
+    function editCustomer(index) {
+      const customer = customers[index];
+      document.getElementById('customerName').value = customer.name;
+      document.getElementById('customerPhone').value = customer.phone || '';
+      document.getElementById('customerAddress').value = customer.address || '';
+
+      customers.splice(index, 1);
+      document.getElementById('customerForm').onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('customerName').value.trim();
+        const phone = document.getElementById('customerPhone').value.trim();
+        const address = document.getElementById('customerAddress').value.trim();
+
+        if (!name) {
+          alert("الاسم مطلوب");
+          return;
+        }
+
+        customers.push({ name, phone, address });
+        localStorage.setItem('customers', JSON.stringify(customers));
+        renderCustomers();
+        this.reset();
+        resetCustomerFormSubmit();
+      };
+    }
+
+    function resetCustomerFormSubmit() {
+      document.getElementById('customerForm').onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('customerName').value.trim();
+        const phone = document.getElementById('customerPhone').value.trim();
+        const address = document.getElementById('customerAddress').value.trim();
+
+        if (!name) {
+          alert("الاسم مطلوب");
+          return;
+        }
+
+        customers.push({ name, phone, address });
+        localStorage.setItem('customers', JSON.stringify(customers));
+        renderCustomers();
+        this.reset();
+      };
+    }
+
+    // --- إدارة الموردين --- //
+    function renderSuppliers() {
+      const tableBody = document.querySelector('#suppliersTable tbody');
+      tableBody.innerHTML = '';
+
+      suppliers.forEach((supplier, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${supplier.name}</td>
+          <td>${supplier.phone || ''}</td>
+          <td>${supplier.address || ''}</td>
+          <td class="actions">
+            <button class="edit-btn" onclick="editSupplier(${index})">تعديل</button>
+            <button class="delete-btn" onclick="deleteSupplier(${index})">حذف</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    document.getElementById('supplierForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('supplierName').value.trim();
+      const phone = document.getElementById('supplierPhone').value.trim();
+      const address = document.getElementById('supplierAddress').value.trim();
+
+      if (!name) {
+        alert("الاسم مطلوب");
+        return;
+      }
+
+      suppliers.push({ name, phone, address });
+      localStorage.setItem('suppliers', JSON.stringify(suppliers));
+      renderSuppliers();
+      this.reset();
+    });
+
+    function deleteSupplier(index) {
+      if (confirm("هل أنت متأكد من حذف هذا المورد؟")) {
+        suppliers.splice(index, 1);
+        localStorage.setItem('suppliers', JSON.stringify(suppliers));
+        renderSuppliers();
+      }
+    }
+
+    function editSupplier(index) {
+      const supplier = suppliers[index];
+      document.getElementById('supplierName').value = supplier.name;
+      document.getElementById('supplierPhone').value = supplier.phone || '';
+      document.getElementById('supplierAddress').value = supplier.address || '';
+
+      suppliers.splice(index, 1);
+      document.getElementById('supplierForm').onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('supplierName').value.trim();
+        const phone = document.getElementById('supplierPhone').value.trim();
+        const address = document.getElementById('supplierAddress').value.trim();
+
+        if (!name) {
+          alert("الاسم مطلوب");
+          return;
+        }
+
+        suppliers.push({ name, phone, address });
+        localStorage.setItem('suppliers', JSON.stringify(suppliers));
+        renderSuppliers();
+        this.reset();
+        resetSupplierFormSubmit();
+      };
+    }
+
+    function resetSupplierFormSubmit() {
+      document.getElementById('supplierForm').onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('supplierName').value.trim();
+        const phone = document.getElementById('supplierPhone').value.trim();
+        const address = document.getElementById('supplierAddress').value.trim();
+
+        if (!name) {
+          alert("الاسم مطلوب");
+          return;
+        }
+
+        suppliers.push({ name, phone, address });
+        localStorage.setItem('suppliers', JSON.stringify(suppliers));
+        renderSuppliers();
+        this.reset();
+      };
+    }
+
+    // --- إدارة الخزنة --- //
+    function renderTreasury() {
+      const tableBody = document.querySelector('#treasuryTable tbody');
+      tableBody.innerHTML = '';
+
+      treasury.forEach((op, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${op.date}</td>
+          <td>${op.type}</td>
+          <td>${op.amount}</td>
+          <td>${op.reason}</td>
+          <td class="actions">
+            <button class="delete-btn" onclick="deleteTreasury(${index})">حذف</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    document.getElementById('treasuryForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const type = document.getElementById('treasuryType').value;
+      const amount = parseFloat(document.getElementById('treasuryAmount').value);
+      const reason = document.getElementById('treasuryReason').value.trim();
+
+      if (isNaN(amount) || !reason) {
+        alert("يرجى ملء الحقول بشكل صحيح");
+        return;
+      }
+
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('ar-SA') + ' ' + now.toLocaleTimeString('ar-SA');
+
+      treasury.push({ date: dateStr, type, amount, reason });
+      localStorage.setItem('treasury', JSON.stringify(treasury));
+      renderTreasury();
+      this.reset();
+    });
+
+    function deleteTreasury(index) {
+      if (confirm("هل أنت متأكد من حذف هذه العملية؟")) {
+        treasury.splice(index, 1);
+        localStorage.setItem('treasury', JSON.stringify(treasury));
+        renderTreasury();
+      }
+    }
+
+    // --- فاتورة شراء --- //
+    let currentInvoiceBuyItems = [];
+
+    function addInvoiceBuyItem() {
+      const supplierId = document.getElementById('invoiceBuySupplier').value;
+      const productId = document.getElementById('invoiceBuyProduct').value;
+      const qty = parseInt(document.getElementById('invoiceBuyQty').value);
+      const price = parseFloat(document.getElementById('invoiceBuyPrice').value);
+
+      if (!supplierId || !productId || isNaN(qty) || isNaN(price)) {
+        alert("يرجى ملء الحقول بشكل صحيح");
+        return;
+      }
+
+      const product = products.find(p => p.name === productId);
+      const total = qty * price;
+
+      currentInvoiceBuyItems.push({
+        product: product.name,
+        qty,
+        price,
+        total
+      });
+
+      renderInvoiceBuyTable();
+      document.getElementById('invoiceBuyQty').value = 1;
+      document.getElementById('invoiceBuyPrice').value = '';
+    }
+
+    function renderInvoiceBuyTable() {
+      const tableBody = document.querySelector('#invoiceBuyTable tbody');
+      tableBody.innerHTML = '';
+
+      currentInvoiceBuyItems.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.product}</td>
+          <td>${item.qty}</td>
+          <td>${item.price}</td>
+          <td>${item.total}</td>
+          <td class="actions">
+            <button class="delete-btn" onclick="removeInvoiceBuyItem(${index})">حذف</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    function removeInvoiceBuyItem(index) {
+      currentInvoiceBuyItems.splice(index, 1);
+      renderInvoiceBuyTable();
+    }
+
+    function saveInvoiceBuy() {
+      if (currentInvoiceBuyItems.length === 0) {
+        alert("لا توجد أصناف في الفاتورة");
+        return;
+      }
+
+      const invoiceNum = document.getElementById('invoiceBuyNum').value.trim();
+      const supplierId = document.getElementById('invoiceBuySupplier').value;
+
+      if (!invoiceNum || !supplierId) {
+        alert("يرجى ملء رقم الفاتورة واسم المورد");
+        return;
+      }
+
+      const total = currentInvoiceBuyItems.reduce((sum, item) => sum + item.total, 0);
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('ar-SA') + ' ' + now.toLocaleTimeString('ar-SA');
+
+      const invoice = {
+        number: invoiceNum,
+        supplier: supplierId,
+        date: dateStr,
+        items: currentInvoiceBuyItems,
+        total: total
+      };
+
+      invoices.buy.push(invoice);
+      localStorage.setItem('invoices', JSON.stringify(invoices));
+
+      alert("تم حفظ الفاتورة بنجاح");
+      currentInvoiceBuyItems = [];
+      renderInvoiceBuyTable();
+      document.getElementById('invoiceBuyForm').reset();
+    }
+
+    function printInvoice(type) {
+      if (currentInvoiceBuyItems.length === 0) {
+        alert("لا توجد أصناف لطباعتها");
+        return;
+      }
+
+      let html = '<h2>فاتورة ' + (type === 'buy' ? 'شراء' : 'بيع') + '</h2>';
+      html += '<table border="1" style="width:100%; border-collapse: collapse;">';
+      html += '<thead><tr><th>الصنف</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody>';
+
+      currentInvoiceBuyItems.forEach(item => {
+        html += `<tr><td>${item.product}</td><td>${item.qty}</td><td>${item.price}</td><td>${item.total}</td></tr>`;
+      });
+
+      const total = currentInvoiceBuyItems.reduce((sum, item) => sum + item.total, 0);
+      html += `</tbody><tfoot><tr><td colspan="3">الإجمالي</td><td>${total}</td></tr></tfoot></table>`;
+      html += '<p>تمت الطباعة في: ' + new Date().toLocaleString('ar-SA') + '</p>';
+
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>فاتورة ${type === 'buy' ? 'شراء' : 'بيع'}</title>
+            <style>
+              body { font-family: Arial, sans-serif; }
+              table { width: 100%; border-collapse: collapse; }
+              th, td { padding: 8px; text-align: center; border: 1px solid #000; }
+              tfoot td { font-weight: bold; }
+            </style>
+          </head>
+          <body>${html}</body>
+        </html>
+      `);
+      printWindow.document.close();
+      printWindow.print();
+    }
+
+    // --- تحميل البيانات عند فتح الصفحات --- //
+    document.addEventListener('DOMContentLoaded', function() {
+      renderProducts();
+      renderCustomers();
+      renderSuppliers();
+      renderTreasury();
+
+      // ملء قوائم الموردين والأصناف في فاتورة الشراء
+      const supplierSelect = document.getElementById('invoiceBuySupplier');
+      suppliers.forEach(s => {
+        const option = document.createElement('option');
+        option.value = s.name;
+        option.textContent = s.name;
+        supplierSelect.appendChild(option);
+      });
+
+      const productSelect = document.getElementById('invoiceBuyProduct');
+      products.forEach(p => {
+        const option = document.createElement('option');
+        option.value = p.name;
+        option.textContent = p.name;
+        productSelect.appendChild(option);
+      });
+    });
   </script>
+
 </body>
 </html>
